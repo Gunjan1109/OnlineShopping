@@ -1,0 +1,37 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+Email : <input type="text" id="email">
+Password : <input type="text" id="password">
+<div>
+    <button onclick="login()">LogIn</button>
+</div>
+
+<div>
+    <button>SignUp</button>
+</div>
+
+<script>
+    function login(){
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 2){
+                console.log(this.getAllResponseHeaders("authorization"));
+            }
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    console.log(this.responseText)
+                }
+                else if(this.status = 403){
+
+                }
+            }
+        }
+        xhttp.open('post' , '/users/signin',true)
+        xhttp.setRequestHeader('Content-Type' , 'application/json')
+        xhttp.send(JSON.stringify({email : email , password : password}))
+    }
+</script>
